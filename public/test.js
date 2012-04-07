@@ -1,9 +1,11 @@
 
 function postBookmark() {
-	
-	loc = $(location).attr('href');
-	titleVal = $(document).attr('title');
-	keyVal = 'arad';
+	// 
+	// var loc = $(location).attr('href');
+	// var titleVal = $(document).attr('title');
+	var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
+	var titleVal = document.title;
+	var keyVal = 'arad';
 	
 	jQuery.ajax({
 	  type: 'POST',
