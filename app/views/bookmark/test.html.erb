@@ -1,1 +1,7 @@
-<a href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='http://localhost:3000/test.js';})();">Marklet</a>
+<a href="javascript:
+(function(){
+	m=document.createElement('script');
+	m.type='text/javascript';
+	m.src='http://localhost:3000/test.js?random='+ (Math.random() * 99999999);
+	document.body.appendChild(m);
+})();">Marklet</a>

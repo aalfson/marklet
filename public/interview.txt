@@ -1,0 +1,4 @@
+Ad hoc systems in which each team comes up with their own way of managing information internally. 
+Heavy dependence on email, Skype chats, google docs. 
+Larger companies have teams to develop and share information internally. 
+Smaller companies are fly by the seat of their pants. 
