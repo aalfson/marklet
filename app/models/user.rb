@@ -1,3 +1,3 @@
-class User < ActiveRecord::B
+class User < ActiveRecord::Base
   attr_accessible :id, :name
 end
