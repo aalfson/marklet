@@ -27,10 +27,7 @@ function loadScript(url, callback)
                                         || this.readyState == "complete") )
                 {
                         done = true;
-
-                        // Continue your code
                         callback();
-
                         // Handle memory leak in IE
                         script.onload = script.onreadystatechange = null;
                         head.removeChild( script );
