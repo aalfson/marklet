@@ -58,7 +58,7 @@ Marklet::Application.routes.draw do
   
   root :to => 'bookmark#index'
   match 'post' => 'bookmark#post'
-  match 'test' => 'bookmark#test'
+  match 'marklet' => 'bookmark#marklet'
 
   
 end

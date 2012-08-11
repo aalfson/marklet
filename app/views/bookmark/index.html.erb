@@ -1,7 +1,7 @@
-<h1> <%= @msg %> </h1>
+<h1>Bookmarks</h1>
 <br/>
-
+<table class='table'>
 <% @bookmarks.each do |x| %>
-	<%= x.url %>
-	</br>
+	<tr><td><a href='<%= x.url %>'><%= x.title %></a></td><td><%= x.category %></td><td><%= x.user %></td></tr>
 <% end %>
+</table>

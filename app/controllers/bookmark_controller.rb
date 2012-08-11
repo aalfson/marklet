@@ -15,10 +15,7 @@ protect_from_forgery
   end
   
   def index
-    
-    @msg = "Hello, World!"
     @bookmarks = Bookmark.all
-    
   end
   
   def test
