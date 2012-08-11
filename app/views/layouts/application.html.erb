@@ -31,8 +31,7 @@
           <a class="brand" href="#">Marklet</a>
           <div class="container nav-collapse">
             <ul class="nav" style='float:right;'>
-              <li><%= link_to "Sign in", "/signin"  %></li>
-			  <li><%= link_to "Register", "/register"  %></li>
+				<%= render 'menu' %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -41,10 +40,12 @@
 
     <div class="container">
       <div class="content">
-	   <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+	    <p class="notice"><%= notice %></p>
+		<% if alert != nil %>
+	    	<p class="alert"><%= alert %></p>
+		<% end %>
         <div class="row">
-           <div class="span9 offset1.5">
+           <div class="span9 offset1">
               <%= yield %>
             </div>
         </div><!--/row-->
