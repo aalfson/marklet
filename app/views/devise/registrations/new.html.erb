@@ -1,12 +1,12 @@
 <h2>Register</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {id: 'registrationForm'}) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email, :class => 'formLabel' %><br />
+  <div id='firstComponent'><%= f.label :email, :class => 'formLabel' %><br />
   <%= f.email_field :email %></div>
 
-  <div id='registrationName'><%= f.label :name, :class => 'formLabel'   %><br />
+  <div class='registrationComponent'><%= f.label :name, :class => 'formLabel'   %><br />
   <%= f.text_field :name %></div>
 
   <div class='registrationComponent'><%= f.label :password, :class => 'formLabel' %><br />
@@ -15,7 +15,6 @@
   <div class='registrationComponent'><%= f.label :password_confirmation, :class => 'formLabel' %><br />
   <%= f.password_field :password_confirmation %></div>
 
+  <br/>
   <div class='registrationComponent'><%= f.submit "Sign up" %></div>
 <% end %>
-
-<div class='registrationComponent'><%= render "devise/shared/links" %></div>

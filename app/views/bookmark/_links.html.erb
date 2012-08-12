@@ -1,0 +1,9 @@
+<table class='table'>
+<thead>
+	<th>Page</th>
+	<th>User</th>
+</thead>
+<% @results.each do |x| %>
+	<tr><td><a href='<%= x[:url] %>'><%= x[:title] %></a></td><td><a href="<%= x[:user_url] %>"><%= x[:name] %></a></td></tr>
+<% end %>
+</table>

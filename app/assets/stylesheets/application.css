@@ -12,19 +12,18 @@
  *= require_tree .
 */
 
+#registrationForm {
+	position: relative;
+	top: -20px;
+}
+
 .formLabel {
 	position: relative;
 	top: 20px;
 }
 
-#registrationName {
-	position: relative;
-	top: -20px;
-}
-
 .registrationComponent {
-	position: relative;
-	top: -40px;
+	margin: -20px 0 0 0;
 }
 
 #instructionContainer {
