@@ -1,6 +1,11 @@
 Marklet::Application.routes.draw do
-  # devise_for :users
   devise_for :users, :controllers => { :registrations => :registrations }
+  
+  root :to => 'bookmark#index'
+  match 'post' => 'bookmark#post'
+  match '/:user/bookmarklet' => 'user#bookmarklet', :as => :bookmarklet
+  match '/:user' => 'bookmark#user_index', :as => :user
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -58,15 +63,4 @@ Marklet::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-  
-  root :to => 'bookmark#index'
-  match 'post' => 'bookmark#post'
-  match '/:user/bookmarklet' => 'user#bookmarklet', :as => :bookmarklet
-  match '/:user' => 'bookmark#user_index', :as => :user
-  
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-  
-
 end
