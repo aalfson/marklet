@@ -4,7 +4,7 @@ class UserController < ApplicationController
   
   #creates a bookmarklet w/ unique id for each user. 
   def script
-    @script = "javascript:(function()%7Bdocument.body.appendChild(document.createElement('script')).src='http://localhost:3000/marklet.js';%7D)(" + current_user.id.to_s + ");"
+    @script = "javascript:(function()%7Bmarkletid=" + current_user.id.to_s + ";document.body.appendChild(document.createElement('script')).src='http://localhost:3000/marklet.js';%7D)();"
   end
   
 end

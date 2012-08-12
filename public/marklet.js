@@ -1,14 +1,13 @@
 
-function postBookmark(id) {
+function postBookmark() {
 	
 	var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 	var titleVal = document.title;
-	var keyVal = id;
 	
 	jQuery.ajax({
 	  type: 'POST',
 	  url: 'http://localhost:3000/post',
-	  data: { url: loc, title: titleVal, key: keyVal }
+	  data: { url: loc, title: titleVal, id: markletid }
 	});
 }
 
@@ -37,17 +36,17 @@ function loadScript(url, callback)
         head.appendChild(script);
 }
 
-function init(id) {
+function init() {
 
 	try {
 		if (jQuery) {
-			postBookmark(id);
+			postBookmark();
 		}
 	}
 	catch(err) {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
 			loadScript("http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js", function() {
-				postBookmark(id);
+				postBookmark();
 			});
 		}
 		else {

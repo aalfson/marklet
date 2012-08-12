@@ -60,7 +60,6 @@ Marklet::Application.routes.draw do
   
   root :to => 'bookmark#index'
   match 'post' => 'bookmark#post'
-  match 'marklet' => 'bookmark#marklet'
   match 'script' => 'user#script'
 
   

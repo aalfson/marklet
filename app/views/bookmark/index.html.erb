@@ -2,6 +2,6 @@
 <br/>
 <table class='table'>
 <% @bookmarks.each do |x| %>
-	<tr><td><a href='<%= x.url %>'><%= x.title %></a></td><td><%= x.category %></td><td><%= x.user %></td></tr>
+	<tr><td><a href='<%= x.url %>'><%= x.title %></a></td><td><%= x.category %></td><td><%= x.user.name %></td></tr>
 <% end %>
 </table>
