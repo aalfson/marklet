@@ -60,7 +60,12 @@ Marklet::Application.routes.draw do
   
   root :to => 'bookmark#index'
   match 'post' => 'bookmark#post'
-  match '/:user/bookmarklet' => 'user#bookmarklet'
-  match '/:user' => 'user#index'
+  match '/:user/bookmarklet' => 'user#bookmarklet', :as => :bookmarklet
+  match '/:user' => 'user#index', :as => :user
+  
+  # Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
+  
 
 end
