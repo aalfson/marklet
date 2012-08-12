@@ -6,7 +6,10 @@
   <div><%= f.label :email, :class => 'formLabel' %><br />
   <%= f.email_field :email %></div>
 
-  <div id='registrationPassword'><%= f.label :password, :class => 'formLabel' %><br />
+  <div id='registrationName'><%= f.label :name, :class => 'formLabel'   %><br />
+  <%= f.text_field :name %></div>
+
+  <div class='registrationComponent'><%= f.label :password, :class => 'formLabel' %><br />
   <%= f.password_field :password %></div>
 
   <div class='registrationComponent'><%= f.label :password_confirmation, :class => 'formLabel' %><br />
