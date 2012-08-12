@@ -1,0 +1,7 @@
+<h1><%= @user %>'s Bookmarks</h1>
+<br/>
+<table class='table'>
+<% @results.each do |x| %>
+	<tr><td><a href='<%= x[:url] %>'><%= x[:title] %></a></td><td><%= x[:name] %></td></tr>
+<% end %>
+</table>

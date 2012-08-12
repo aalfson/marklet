@@ -58,9 +58,9 @@ Marklet::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
   
-  root :to => 'bookmark#index'
+  root :to => 'user#all'
   match 'post' => 'bookmark#post'
-  match 'script' => 'user#script'
+  match '/:user/bookmarklet' => 'user#bookmarklet'
+  match '/:user' => 'user#index'
 
-  
 end

@@ -12,15 +12,5 @@ class BookmarkController < ApplicationController
 
     render :nothing => true
   end
-  
-  #lists all bookmarks
-  def index
-    @results = []
-    
-    Bookmark.all.each do |b|
-      entry = {url: b.url, title: b.title, user: b.user, name: User.find(b.user).name}
-      @results.push(entry)
-    end
-  end
     
 end
