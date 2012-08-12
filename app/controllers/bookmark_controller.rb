@@ -18,7 +18,21 @@ class BookmarkController < ApplicationController
     @results = []
     
     Bookmark.all.each do |b|
-      entry = {url: b.url, title: b.title, user: b.user, name: b.user.name}
+      user_url = "/" + b.user.name
+      entry = {url: b.url, title: b.title, user: b.user, name: b.user.name, user_url: user_url }
+      @results.push(entry)
+    end
+  end
+  
+  #lists all of a user's bookmarks
+  def user_index
+    @user = params[:user]
+    @results = []
+    
+    u = User.where(name: params[:user]).first
+    u.bookmarks.each do |b|
+      user_url = "/" + u.name
+      entry = {url: b.url, title: b.title, user: b.user, name: u.name, user_url: user_url}
       @results.push(entry)
     end
   end

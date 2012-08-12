@@ -5,7 +5,7 @@ function postBookmark() {
 	
 	jQuery.ajax({
 	  type: 'POST',
-	  url: 'http://localhost:3000/post',
+	  url: 'http://marklet.herokuapp.com/post',
 	  data: { url: loc, title: titleVal, id: markletid }, 
 	  complete: alert("Saved to marklet!"),
 	});
@@ -43,13 +43,12 @@ function init() {
 
 	try {
 		if (jQuery) {
-			loadScript("https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js", postBookmark());
+			postBookmark();
 		}
 	}
 	catch(err) {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
-			loadScript("https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js", null);
-			loadScript("http://localhost:3000/modal.js", postBookmark());
+			loadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", postBookmark());
 		}
 		else {
 			console.log("The following error occured while checking for jQuery: " + err);
