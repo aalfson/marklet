@@ -11,3 +11,22 @@
  *= require_self
  *= require_tree .
 */
+
+.formLabel {
+	position: relative;
+	top: 20px;
+}
+
+#registrationPassword {
+	position: relative;
+	top: -20px;
+}
+
+.registrationComponent {
+	position: relative;
+	top: -40px;
+}
+
+.editComponent {
+	
+}

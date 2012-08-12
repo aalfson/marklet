@@ -1,9 +1,9 @@
 
-function postBookmark() {
+function postBookmark(id) {
 	
 	var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 	var titleVal = document.title;
-	var keyVal = 'arad';
+	var keyVal = id;
 	
 	jQuery.ajax({
 	  type: 'POST',
@@ -37,17 +37,17 @@ function loadScript(url, callback)
         head.appendChild(script);
 }
 
-function init() {
+function init(id) {
 
 	try {
 		if (jQuery) {
-			postBookmark();
+			postBookmark(id);
 		}
 	}
 	catch(err) {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
 			loadScript("http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js", function() {
-				postBookmark();
+				postBookmark(id);
 			});
 		}
 		else {
