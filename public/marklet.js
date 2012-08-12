@@ -1,13 +1,13 @@
-
 function postBookmark() {
-	
+
 	var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 	var titleVal = document.title;
 	
 	jQuery.ajax({
 	  type: 'POST',
 	  url: 'http://localhost:3000/post',
-	  data: { url: loc, title: titleVal, id: markletid }
+	  data: { url: loc, title: titleVal, id: markletid }, 
+	  complete: alert("Saved to marklet!"),
 	});
 }
 
@@ -26,7 +26,10 @@ function loadScript(url, callback)
                                         || this.readyState == "complete") )
                 {
                         done = true;
-                        callback();
+						if (callback != null) {
+							callback();
+						}
+
                         // Handle memory leak in IE
                         script.onload = script.onreadystatechange = null;
                         head.removeChild( script );
@@ -40,14 +43,13 @@ function init() {
 
 	try {
 		if (jQuery) {
-			postBookmark();
+			loadScript("https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js", postBookmark());
 		}
 	}
 	catch(err) {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
-			loadScript("http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js", function() {
-				postBookmark();
-			});
+			loadScript("https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js", null);
+			loadScript("http://localhost:3000/modal.js", postBookmark());
 		}
 		else {
 			console.log("The following error occured while checking for jQuery: " + err);
