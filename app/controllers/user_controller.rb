@@ -6,16 +6,6 @@ class UserController < ApplicationController
   def bookmarklet
     @script = "javascript:(function()%7Bmarkletid=" + current_user.id.to_s + ";document.body.appendChild(document.createElement('script')).src='http://localhost:3000/marklet.js';%7D)();"
   end
-  
-  #lists all bookmarks
-  def all
-    @results = []
-    
-    Bookmark.all.each do |b|
-      entry = {url: b.url, title: b.title, user: b.user, name: b.user.name}
-      @results.push(entry)
-    end
-  end
 
   #lists all of a user's bookmarks
   def index

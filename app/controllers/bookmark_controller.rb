@@ -12,5 +12,15 @@ class BookmarkController < ApplicationController
 
     render :nothing => true
   end
+  
+  #lists all bookmarks - does not require user authentication
+  def index
+    @results = []
+    
+    Bookmark.all.each do |b|
+      entry = {url: b.url, title: b.title, user: b.user, name: b.user.name}
+      @results.push(entry)
+    end
+  end
     
 end

@@ -1,5 +1,5 @@
 class Bookmark < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessible :url, :title, :category
+  attr_accessible :url, :title, :category, :user
 end
