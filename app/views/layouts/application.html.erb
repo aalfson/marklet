@@ -30,7 +30,7 @@
           <div class="container nav-collapse">
             <ul class="nav" style='float:right;'>
 				<% if user_signed_in? %>
-					<li><%= link_to "Your Bookmarks", user_url(user: current_user.name), :method => :get %></li>
+					<li><%= link_to "My Bookmarks", user_url(user: current_user.name), :method => :get %></li>
 					<li><%= link_to "Get Bookmarklet", bookmarklet_url(user: current_user.name), :method => :get %></li>
 					<li><%= link_to "Account", edit_user_registration_path, :method => :get %></li>
 				   	<li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
