@@ -1,13 +1,15 @@
 function postBookmark() {
 
-	var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
-	var titleVal = document.title;
-	
-	jQuery.ajax({
-	  type: 'POST',
-	  url: 'http://marklet.herokuapp.com/post',
-	  data: { url: loc, title: titleVal, id: markletid }, 
-	  complete: alert("Saved to marklet!"),
+	$(document).ready(function() {
+		var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
+		var titleVal = document.title;
+
+		jQuery.ajax({
+		  type: 'POST',
+		  url: 'http://marklet.herokuapp.com/post',
+		  data: { url: loc, title: titleVal, id: markletid }, 
+		  complete: alert("Saved to marklet!"),
+		});		
 	});
 }
 
