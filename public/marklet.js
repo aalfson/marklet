@@ -1,6 +1,5 @@
 function postBookmark() {
 
-	$(document).ready(function() {
 		var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 		var titleVal = document.title;
 
@@ -10,7 +9,6 @@ function postBookmark() {
 		  data: { url: loc, title: titleVal, id: markletid }, 
 		  complete: alert("Saved to marklet!"),
 		});		
-	});
 }
 
 function loadScript(url, callback)
@@ -50,7 +48,9 @@ function init() {
 	}
 	catch(err) {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
-			loadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", postBookmark());
+			loadScript("http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js", function() {
+				postBookmark();
+			});
 		}
 		else {
 			console.log("The following error occured while checking for jQuery: " + err);
