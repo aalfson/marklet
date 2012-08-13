@@ -8,6 +8,7 @@ function postBookmark() {
 		  type: 'POST',
 		  url: 'http://marklet.herokuapp.com/post',
 		  data: { url: loc, title: titleVal, id: markletid }, 
+		  dataType: "jsonp",
 		  complete: alert("Saved to marklet!"),
 		});		
 	});
