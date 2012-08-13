@@ -1,5 +1,6 @@
 function postBookmark() {
 
+	$(document).ready(function() {
 		var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 		var titleVal = document.title;
 
@@ -9,6 +10,7 @@ function postBookmark() {
 		  data: { url: loc, title: titleVal, id: markletid }, 
 		  complete: alert("Saved to marklet!"),
 		});		
+	});
 }
 
 function loadScript(url, callback)
@@ -50,7 +52,7 @@ function init() {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
 			loadScript("http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js", function() {
 				postBookmark();
-			});
+			});	
 		}
 		else {
 			console.log("The following error occured while checking for jQuery: " + err);
