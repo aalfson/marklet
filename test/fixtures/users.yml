@@ -1,0 +1,4 @@
+joe:
+    email: "joe@test.com"
+    name: "joe"
+    encrypted_password: "$2a$10$UGzgyKz31QeJJNNjy3mdU.4AXRO3k0vb9i1oHNrLUOz.lhvrc1tL2"
