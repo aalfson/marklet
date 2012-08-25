@@ -14,3 +14,33 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+
+$(document).ready(function() {
+	
+	$(".bookmark_row").bind('mouseover', function() {
+		$(this).find('.bookmark_action').show();
+	}); 
+	
+	$(".bookmark_row").bind('mouseout', function() {
+		$(this).find('.bookmark_action').hide(); 
+	});
+
+	$(".icon-remove").bind('click', function() {
+		
+		var id = $(this).attr('bookmark'); 
+		
+		jQuery.ajax({
+		  type: 'DELETE',
+		  url: 'http://localhost:3000/bookmark/delete',
+		  data: { id: id }, 
+		  dataType: "jsonp",
+		});
+	}); 
+	
+	// $(".icon-pencil").bind('click', function() {
+	// 	var id = $(this).attr('bookmark');
+	// 	window.location.replace('http://localhost:3000/bookmark/update');
+	// });
+	
+}); 

@@ -45,3 +45,26 @@
 	margin-right: auto;
 	text-align: center;
 }
+
+.bookmark_table {
+	width: 100%;
+}
+
+.bookmark_row {
+	width: 100%;
+}
+
+.bookmark_action:link, .bookmark_action:hover, .bookmark_action:visited, .bookmark_action:active {
+	display: none;
+	margin: 0 4px 0 4px;
+	text-decoration: none;
+	color: #333;
+}
+
+.action_cell {
+	width: 50px;
+}
+
+.action_cell a {
+	
+}

@@ -5,6 +5,8 @@ Marklet::Application.routes.draw do
   match 'post' => 'bookmark#post'
   match '/:user/bookmarklet' => 'user#bookmarklet', :as => :bookmarklet
   match '/:user' => 'bookmark#user_index', :as => :user
+  match '/bookmark/delete' => 'bookmark#delete'
+  match '/bookmark/update/:id' => 'bookmark#update', :as => :bookmarklet_update
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

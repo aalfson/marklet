@@ -1,9 +1,13 @@
-<table class='table'>
+<table class='table bookmark_table'>
 <thead>
 	<th>Page</th>
 	<th>User</th>
 </thead>
 <% @results.each do |x| %>
-	<tr><td><a href='<%= x[:url] %>'><%= x[:title] %></a></td><td><a href="<%= x[:user_url] %>"><%= x[:name] %></a></td></tr>
+	<tr class='bookmark_row'><td><a href='<%= x[:url] %>'><%= x[:title] %></a></td><td><a href="<%= x[:user_url] %>"><%= x[:name] %></a></td><td class='action_cell'>
+		<% if x[:user] == current_user %>
+		<a href="<%= bookmarklet_update_path(x[:id]) %>" class='bookmark_action'><i class="icon-pencil" bookmark="<%= x[:id] %>"></i></a><a href="" class="bookmark_action"><i class="icon-remove" bookmark="<%= x[:id] %>"></i></a>
+		<% end %>
+		</td></tr>
 <% end %>
 </table>

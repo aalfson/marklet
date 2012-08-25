@@ -6,7 +6,7 @@ function postBookmark() {
 
 		jQuery.ajax({
 		  type: 'POST',
-		  url: 'http://marklet.herokuapp.com/post',
+		  url: 'http://localhost:3000/post',
 		  data: { url: loc, title: titleVal, id: markletid }, 
 		  dataType: "jsonp",
 		  complete: alert("Saved to marklet!"),
@@ -51,11 +51,7 @@ function init() {
 	}
 	catch(err) {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
-			// loadScript("http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js", function() {
-			// 	postBookmark();
-			// });	
-
-			loadScript("http://marklet.herokuapp.com/jquery-1.7.2.min.js", function() {
+			loadScript("http://localhost:3000/jquery-1.7.2.min.js", function() {
 				postBookmark();
 			});	
 		}
