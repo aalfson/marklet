@@ -6,7 +6,7 @@ function postBookmark() {
 
 		jQuery.ajax({
 		  type: 'POST',
-		  url: 'http://localhost:3000/post',
+		  url: 'http://localhost:3000/bookmark/create',
 		  data: { url: loc, title: titleVal, id: markletid }, 
 		  dataType: "jsonp",
 		  complete: alert("Saved to marklet!"),

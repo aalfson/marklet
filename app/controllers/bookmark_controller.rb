@@ -1,7 +1,7 @@
 class BookmarkController < ApplicationController
   
   #handles bookmarklet post request
-  def post
+  def create
     
     #cross-site scripting fix
     headers['Access-Control-Allow-Origin'] = '*'
@@ -42,38 +42,46 @@ class BookmarkController < ApplicationController
     end
   end
   
+  def update_bookmark_form
+    begin
+      @bookmark = Bookmark.find(params[:id])
+    rescue
+      redirect_to :root
+    end
+  end
+  
   #updates bookmark
-  def update
-    
-    id = params[:id]
-    user = params[:id]
+  def update  
     
     begin
-      b = Bookmark.find(:id)
+      bookmark = Bookmark.find(params[:id])
       
       #Only the title and url attributes are updateable. 
-      if (b.user == user)
-        b.update_attributes(url: params[:url], title: params[:title])
+      if bookmark.user == current_user
+        bookmark.update_attributes(url: params[:url], title: params[:title])
+        redirect_to '/' + current_user.name
       end
     rescue
+      redirect_to '/' + current_user.name
     end
-    
-     render :nothing => true
     
   end
   
   #deletes bookmark
   def delete
     
-    id = params[:id]
-    bookmark = Bookmark.find(id)
-    user = bookmark.user
+    begin
+      id = params[:id]
+      bookmark = Bookmark.find(id)
+      user = bookmark.user
     
-    #find bookmark, check to ensure it belongs to user, then delete it. 
-    if user == current_user
-       bookmark.destroy
+      #find bookmark, check to ensure it belongs to user, then delete it. 
+      if user == current_user
+         bookmark.destroy
+      end
+    rescue
+      redirect_to :root
     end
     
-    render :nothing => true
   end
 end

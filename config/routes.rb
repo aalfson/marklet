@@ -2,11 +2,15 @@ Marklet::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => :registrations }
   
   root :to => 'bookmark#index'
-  match 'post' => 'bookmark#post'
+  
+  match '/bookmark/create' => 'bookmark#create'
+  match '/bookmark/delete' => 'bookmark#delete'
+  match '/bookmark/update/:id' => 'bookmark#update_bookmark_form', :as => :bookmarklet_update_form
+  match '/bookmark/update' => 'bookmark#update'
+  
   match '/:user/bookmarklet' => 'user#bookmarklet', :as => :bookmarklet
   match '/:user' => 'bookmark#user_index', :as => :user
-  match '/bookmark/delete' => 'bookmark#delete'
-  match '/bookmark/update/:id' => 'bookmark#update', :as => :bookmarklet_update
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
