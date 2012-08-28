@@ -62,7 +62,7 @@ class BookmarkController < ApplicationController
         redirect_to '/' + current_user.name
       end
     rescue
-      redirect_to '/' + current_user.name
+      redirect_to :root
     end
     
   end
@@ -79,9 +79,10 @@ class BookmarkController < ApplicationController
       if user == current_user
          bookmark.destroy
       end
+      
+      redirect_to :back
     rescue
       redirect_to :root
     end
-    
   end
 end
