@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829014240) do
+ActiveRecord::Schema.define(:version => 20120901195252) do
 
   create_table "bookmarks", :force => true do |t|
     t.datetime "created_at",  :null => false
@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(:version => 20120829014240) do
     t.string   "name"
   end
 
+  create_table "categories_users", :id => false, :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "user_id"
+  end
+
   create_table "users", :force => true do |t|
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
@@ -41,11 +46,10 @@ ActiveRecord::Schema.define(:version => 20120829014240) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "name",                                   :null => false
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

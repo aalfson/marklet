@@ -61,7 +61,10 @@
     <div class="container">
       <div class="content">
         <div class="row">
-           <div class="span9 offset1">
+			<div class="span3" id='categories'>
+				<%= render "categories" %>
+			</div>
+           	<div class="span9">
 			<p class="notice"><%= notice %></p>
 			<% if alert != nil %>
 		    	<p class="alert"><%= alert %></p>

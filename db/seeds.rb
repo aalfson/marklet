@@ -13,6 +13,9 @@
   astro = Category.create(name: "Astronomy")
   tools = Category.create(name: "Tools")
   
+  j.categories = [tech, astro]
+  b.categories = [astro, tools]
+  
   Bookmark.create(url: "http://www.google.com", title: "Google", user: j, category: tools)
   Bookmark.create(url: "http://www.universetoday.com", title: "Universe Today", user: j, category: astro)
   Bookmark.create(url: "http://news.ycombinator.com/", title: "Hacker News", user: b, category: tech)
