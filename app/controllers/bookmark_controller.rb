@@ -30,7 +30,8 @@ class BookmarkController < ApplicationController
   end
   
   def category_index
-     category = Category.where(name: params[:category]).first
+     @name = params[:category]
+     category = Category.where(name: @name).first
      @results = []
      
      category.bookmarks.each do |b|

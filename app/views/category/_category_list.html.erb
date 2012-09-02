@@ -1,5 +1,6 @@
-<h6>Categories</h6>
-<% @categories.each do |c| %>
-	<a href="/c/<%= c.name %>"><%= c.name %></a><br/>
-<% end %>
-	
+<div id='category_list'>
+	<h6>Categories</h6>
+	<% @categories.each do |c| %>
+		<a href="/c/<%= c.name %>"><%= c.name %></a><br/>
+	<% end %>
+</div>

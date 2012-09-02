@@ -68,3 +68,9 @@
 .action_cell a {
 	
 }
+
+#category_list {
+	position: relative;
+	display: block;
+	top: 16px;
+}
