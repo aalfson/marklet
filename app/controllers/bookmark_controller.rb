@@ -29,6 +29,18 @@ class BookmarkController < ApplicationController
     end
   end
   
+  def category_index
+     category = Category.where(name: params[:category]).first
+     @results = []
+     
+     category.bookmarks.each do |b|
+       user_url = "/" + b.user.name
+       entry = {id: b.id, url: b.url, title: b.title, user: b.user, name: b.user.name, user_url: user_url }
+       @results.push(entry)  
+     end
+  end
+
+  
   #lists all of a user's bookmarks
   def user_index
     @user = params[:user]
@@ -41,7 +53,7 @@ class BookmarkController < ApplicationController
       @results.push(entry)
     end
   end
-  
+
   def update_bookmark_form
     begin
       @bookmark = Bookmark.find(params[:id])

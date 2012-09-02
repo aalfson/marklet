@@ -4,4 +4,8 @@ class Category < ActiveRecord::Base
   
   # attr_accessible :title, :body
   attr_accessible :name, :id, :bookmarks
+  
+  def users_count
+    users.count
+  end
 end
