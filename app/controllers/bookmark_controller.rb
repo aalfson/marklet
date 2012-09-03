@@ -30,28 +30,40 @@ class BookmarkController < ApplicationController
   end
   
   def category_index
-     @name = params[:category]
-     category = Category.where(name: @name).first
-     @results = []
+    @name = params[:category]
+    
+    category = Category.where(name: @name)
+    
+    if category.empty? || category == nil
+      redirect_to :root
+    else
+      category = category.first
+      @results = []
+
+       category.bookmarks.each do |b|
+         user_url = "/" + b.user.name
+         entry = {id: b.id, url: b.url, title: b.title, user: b.user, name: b.user.name, user_url: user_url }
+         @results.push(entry)  
+       end
+    end
      
-     category.bookmarks.each do |b|
-       user_url = "/" + b.user.name
-       entry = {id: b.id, url: b.url, title: b.title, user: b.user, name: b.user.name, user_url: user_url }
-       @results.push(entry)  
-     end
   end
 
-  
   #lists all of a user's bookmarks
   def user_index
     @user = params[:user]
     @results = []
     
     u = User.where(name: params[:user]).first
-    u.bookmarks.each do |b|
-      user_url = "/" + u.name
-      entry = {id: b.id, url: b.url, title: b.title, user: b.user, name: u.name, user_url: user_url}
-      @results.push(entry)
+    
+    if u == nil
+      redirect_to :root
+    else      
+      u.bookmarks.each do |b|
+        user_url = "/" + u.name
+        entry = {id: b.id, url: b.url, title: b.title, user: b.user, name: u.name, user_url: user_url}
+        @results.push(entry)
+      end
     end
   end
 

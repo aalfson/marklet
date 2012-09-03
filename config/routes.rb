@@ -10,8 +10,11 @@ Marklet::Application.routes.draw do
   
   match '/:user/bookmarklet' => 'user#bookmarklet', :as => :bookmarklet
   match '/:user' => 'bookmark#user_index', :as => :user
-  
+
+  match '/c/new' => 'category#new', :as => :new_category
+  match '/c/create' => 'category#create'
   match '/c/:category' => 'bookmark#category_index'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
