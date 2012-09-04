@@ -1,0 +1,11 @@
+<h2>Edit <%= @category.name %></h2>
+<br/>
+<%= form_tag("/c/update", method: "post") do %>
+	<%= label_tag(:name, "Name:") %>
+	<%= text_field_tag(:name, @category.name, {:class => "input-xxlarge", placeholder: "Category name..." }) %><br/>
+
+  	<%= label_tag(:description, "Description:") %>
+	<%= text_area_tag(:description, @category.description , {rows: 3, :class => "input-xxlarge", placeholder: "Category description..."}) %><br/>
+
+	<%= submit_tag("Submit") %>
+<% end %>

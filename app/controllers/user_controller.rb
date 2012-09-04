@@ -1,5 +1,4 @@
 class UserController < ApplicationController
-  protect_from_forgery
   before_filter :authenticate_user!
   
   #creates a bookmarklet w/ unique id for each user. 
