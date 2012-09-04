@@ -1,6 +1,8 @@
 <h2>Edit <%= @category.name %></h2>
 <br/>
 <%= form_tag("/c/update", method: "post") do %>
+	<%= hidden_field_tag(:original_name, @category.name) %>
+	
 	<%= label_tag(:name, "Name:") %>
 	<%= text_field_tag(:name, @category.name, {:class => "input-xxlarge", placeholder: "Category name..." }) %><br/>
 

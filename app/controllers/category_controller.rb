@@ -1,6 +1,6 @@
 class CategoryController < ApplicationController
   
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => :index
   
   #controller for new category form page
   def new
@@ -21,8 +21,8 @@ class CategoryController < ApplicationController
      else
        #standardizes the name of the category
        name.capitalize!
-          
-       c = Category.create(name: name, description: description, users: [current_user])
+      
+       c = Category.create(name: name, description: description)
        c.add_moderator(current_user)
        c.save
        redirect_to '/c/' + name , success: "You successfully created a new category!"
@@ -33,7 +33,7 @@ class CategoryController < ApplicationController
   #controller for edit category form page
   def edit
     
-    category = validate_category(params)
+    category = get_category(params[:category])
     
     #check that the current user is a moderator for the page and set @category
     if category.moderator?(current_user)
@@ -45,32 +45,45 @@ class CategoryController < ApplicationController
   
   #updates category
   def update
-    
-    category = validate_category(params)
+        
+    category = get_category(params[:original_name])
     
     #check that the current user is a moderator for the page
     if category.moderator?(current_user)
       category.update_attributes(name: params[:name], description: params[:description])
+      redirect_to '/c/' + category.name
     else
       redirect_to :back, error: "You must be a moderator to edit a category!"
     end
   end
   
-  
   def index
-  
+    @Categories = Category.all
   end
   
   def subscribe
+    category = get_category(params)
     
+    Subscriber.create(category: category, user: current_user, moderator: false)
+  end
+  
+  def unsubscribe
+    category = get_category(params)
+    
+    begin
+      s = Subscriber.where(category_id: category.id, user_id: current_user.id)
+      s.destroy!
+    rescue
+      redirect_to :root, error: "Could not unsubscribe user from " + category.name
+    end
   end
   
   private 
   
   #helper method that ensures a valid category is provided to the controller
-  def validate_category(params)
+  def get_category(category_name)
   
-    category = Category.where(name: params[:category]).limit(1)
+    category = Category.where(name: category_name).limit(1)
     
     #check that category exists
     if category == nil || category.empty?

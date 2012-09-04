@@ -13,10 +13,9 @@ Marklet::Application.routes.draw do
 
   match '/c/new' => 'category#new', :as => :new_category
   match '/c/create' => 'category#create'
-  match '/c/:category' => 'bookmark#category_index'
-  match '/c/edit/:category' => 'category#edit'
   match '/c/update' => 'category#update'
-
+  match '/c/edit/:category' => 'category#edit'
+  match '/c/:category' => 'bookmark#category_index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

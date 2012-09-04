@@ -13,6 +13,7 @@ class Category < ActiveRecord::Base
     self.users.count
   end
   
+  #Adds a user as a moderator. Creates a subscription to the category if one does not already exist. 
   def add_moderator(user)
       
       if self.users.moderators == nil || !self.users.moderators.include?(user)
@@ -24,6 +25,7 @@ class Category < ActiveRecord::Base
       end
   end
   
+  #removes the moderator from the category. Does not remove their subscription. 
   def remove_moderator(user)
     
     if self.users.moderators != nil && self.users.moderators.include?(user)
