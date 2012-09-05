@@ -18,4 +18,4 @@ Road Map:
 Category-related model, views, and controller. This feature is currently about 1/2 completed. 
 Category selection on bookmarklet submission form
 Voting mechanism
-Comments
+Comments 
