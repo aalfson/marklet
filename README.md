@@ -9,13 +9,19 @@ Marklet generates a bookmarklet with a unique id that users can place in their t
 Completed Features: 
 
 Bookmarklet and Bookmark Submission
+
 Bookmark-related models, views, and controller
+
 User Accounts w/ Devise
+
 Views w/ Twitter's Bootstrap
 
 Road Map: 
 
 Category-related model, views, and controller. This feature is currently about 1/2 completed. 
+
 Category selection on bookmarklet submission form
+
 Voting mechanism
+
 Comments 
