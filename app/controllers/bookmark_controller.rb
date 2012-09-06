@@ -71,7 +71,7 @@ class BookmarkController < ApplicationController
     begin
       @bookmark = Bookmark.find(params[:id])
     rescue
-      redirect_to :root
+      redirect_to :root, :flash => {error: "There was a problem with the page you requested."}
     end
   end
   
@@ -87,7 +87,7 @@ class BookmarkController < ApplicationController
         redirect_to '/' + current_user.name
       end
     rescue
-      redirect_to :root
+      redirect_to :root, :flash => {error: "Could not update the bookmark."}
     end
     
   end
@@ -105,9 +105,9 @@ class BookmarkController < ApplicationController
          bookmark.destroy
       end
       
-      redirect_to :back
+      redirect_to :back, :flash => {success: "You successfully deleted " + bookmark.name}
     rescue
-      redirect_to :root
+      redirect_to :root, :flash => {error: "Could not delete the bookmark."}
     end
   end
 end

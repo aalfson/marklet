@@ -69,6 +69,12 @@
 			<% if alert != nil %>
 		    	<p class="alert"><%= alert %></p>
 			<% end %>
+			<% if flash[:error] != nil %>
+		    	<p class="alert alert-error"><%= flash[:error] %></p>
+			<% end %>
+			<% if flash[:success] != nil %>
+		    	<p class="alert alert-success"><%= flash[:success] %></p>
+			<% end %>
               <%= yield %>
             </div>
         </div><!--/row-->

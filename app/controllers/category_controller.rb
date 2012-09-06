@@ -15,9 +15,9 @@ class CategoryController < ApplicationController
      #checks to see if the name is not blank, or that it does not already exist. 
      #If those conditions are satisfied, creates the Category. 
      if (name == "" || name == nil)
-       redirect_to :back, error: "You must give your category a name."
+       redirect_to :back, :flash => {error: "You must give your category a name."}
      elsif Category.where(name: name).empty? == false
-       redirect_to '/c/' + name, error: "The category you tried to create already exists."
+       redirect_to '/c/' + name, :flash => {error: "The category you tried to create already exists."}
      else
        #standardizes the name of the category
        name.capitalize!
@@ -25,7 +25,7 @@ class CategoryController < ApplicationController
        c = Category.create(name: name, description: description)
        c.add_moderator(current_user)
        c.save
-       redirect_to '/c/' + name , success: "You successfully created a new category!"
+       redirect_to '/c/' + name , :flash => {success: "You successfully created a new category!"}
      end
      
   end
@@ -39,7 +39,7 @@ class CategoryController < ApplicationController
     if category.moderator?(current_user)
       @category = category
     else
-      redirect_to :back, error: "You must be a moderator to edit a category!"
+      redirect_to :root, :flash => {error: "You must be a moderator to edit a category!"}
     end
   end
   
@@ -53,7 +53,7 @@ class CategoryController < ApplicationController
       category.update_attributes(name: params[:name], description: params[:description])
       redirect_to '/c/' + category.name
     else
-      redirect_to :back, error: "You must be a moderator to edit a category!"
+      redirect_to :root, :flash => {error: "You must be a moderator to edit a category!"}
     end
   end
   
@@ -74,7 +74,7 @@ class CategoryController < ApplicationController
       s = Subscriber.where(category_id: category.id, user_id: current_user.id)
       s.destroy!
     rescue
-      redirect_to :root, error: "Could not unsubscribe user from " + category.name
+      redirect_to :root, :flash => {error: "Could not unsubscribe user from " + category.name}
     end
   end
   
@@ -87,7 +87,7 @@ class CategoryController < ApplicationController
     
     #check that category exists
     if category == nil || category.empty?
-      redirect_to :root, error: "That category does not exist."
+      redirect_to :root, :flash => {error: "That category does not exist."}
     else
       category = category[0]
       return category
