@@ -1,5 +1,7 @@
 class BookmarkController < ApplicationController
   
+  before_filter :authenticate_user!, :only => [:update, :delete]
+  
   #handles bookmarklet post request
   def create
     
@@ -34,10 +36,11 @@ class BookmarkController < ApplicationController
     
     category = Category.where(name: @name)
     
+    #get bookmarks
     if category.empty? || category == nil
       redirect_to :root
     else
-      category = category.first
+      category = category[0]
       @results = []
 
        category.bookmarks.each do |b|
@@ -45,6 +48,11 @@ class BookmarkController < ApplicationController
          entry = {id: b.id, url: b.url, title: b.title, user: b.user, name: b.user.name, user_url: user_url }
          @results.push(entry)  
        end
+    end
+    
+    #check to see if user is moderator
+    if user_signed_in? && category.moderator?(current_user)
+      @is_moderator = true
     end
      
   end
@@ -94,20 +102,30 @@ class BookmarkController < ApplicationController
   
   #deletes bookmark
   def delete
-    
-    begin
+
       id = params[:id]
-      bookmark = Bookmark.find(id)
-      user = bookmark.user
-    
-      #find bookmark, check to ensure it belongs to user, then delete it. 
-      if user == current_user
-         bookmark.destroy
-      end
       
-      redirect_to :back, :flash => {success: "You successfully deleted " + bookmark.name}
-    rescue
-      redirect_to :root, :flash => {error: "Could not delete the bookmark."}
-    end
+      #look for bookmark, throw 500 error if not found
+      begin
+        bookmark = Bookmark.find(id)
+      rescue
+       respond_to do |format|
+          response.status = 500
+          format.json { render :json => "Could not process request." }
+        end
+      end    
+      
+      #delete bookmark if it belongs to the current user
+      if bookmark
+        user = bookmark.user
+    
+        if user == current_user
+           bookmark.destroy
+        end
+        
+        respond_to do |format|
+          format.json { render :json => bookmark.id }
+        end
+      end
   end
 end

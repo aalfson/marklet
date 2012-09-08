@@ -39,7 +39,7 @@ class CategoryController < ApplicationController
     if category.moderator?(current_user)
       @category = category
     else
-      redirect_to :root, :flash => {error: "You must be a moderator to edit a category!"}
+      redirect_to :root, :flash => {error: "You must be a moderator to edit this category!"}
     end
   end
   
@@ -51,9 +51,9 @@ class CategoryController < ApplicationController
     #check that the current user is a moderator for the page
     if category.moderator?(current_user)
       category.update_attributes(name: params[:name], description: params[:description])
-      redirect_to '/c/' + category.name
+      redirect_to '/c/' + category.name, :flash => {success: "You successfully updated " + category.name}
     else
-      redirect_to :root, :flash => {error: "You must be a moderator to edit a category!"}
+      redirect_to :root, :flash => {error: "You must be a moderator to edit this category!"}
     end
   end
   
@@ -62,17 +62,19 @@ class CategoryController < ApplicationController
   end
   
   def subscribe
-    category = get_category(params)
-    
+    category = get_category(params[:category])
     Subscriber.create(category: category, user: current_user, moderator: false)
+    redirect_to "/c/" + category.name, :flash => {success: "You successfully subscribed to this category."}    
   end
   
   def unsubscribe
-    category = get_category(params)
+    category = get_category(params[:category])
     
     begin
       s = Subscriber.where(category_id: category.id, user_id: current_user.id)
       s.destroy!
+      redirect_to :root, :flash => {success: "You have unsubscribed from " + category.name}
+      # render :nothing => true
     rescue
       redirect_to :root, :flash => {error: "Could not unsubscribe user from " + category.name}
     end

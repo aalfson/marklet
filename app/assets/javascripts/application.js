@@ -15,8 +15,54 @@
 //= require twitter/bootstrap
 //= require_tree .
 
+function initUnsubscribeActionButton() {
+	
+	$("#unsubscribe_button").bind('click', function(e) {
+		
+		e.preventDefault(); 
+		
+		var category = $(this).data('category'); 
 
-$(document).ready(function() {
+		$.ajax({
+			type: 'POST', 
+			url: '/c/unsubscribe',
+			data: { category: category },
+			success: function() {
+				$(this).unbind();
+				$(this).attr('id', "#subscribe_button"); 
+				$("#subscribe_button > i").attr('class', 'icon-minus icon-white'); 
+				initSubscribeButton();
+			}
+		}); 		
+	});
+}
+
+
+function initSubscribeActionButton() {
+	
+	$("#subscribe_button").bind('click', function(e) {
+		
+		e.preventDefault(); 
+						
+		var category = $(this).data('category'); 
+
+		$.ajax({
+			type: 'POST', 
+			url: '/c/subscribe',
+			data: { category: category },
+			dataType: "jsonp",
+			success: function() {
+				$(this).unbind();
+				$(this).attr('id', "#unsubscribe_button"); 
+				$("#unsubscribe_button > i").attr('class', 'icon-plus icon-white'); 
+				initUnsubscribeButton();
+			}
+		}); 
+	}); 
+}
+
+
+function initBookmarkActionButtons() {
 	
 	$(".bookmark_row").bind('mouseover', function() {
 		$(this).find('.bookmark_action').show();
@@ -26,21 +72,36 @@ $(document).ready(function() {
 		$(this).find('.bookmark_action').hide(); 
 	});
 
-	$(".icon-remove").bind('click', function() {
+	$(".icon-remove").bind('click', function(e) {
 		
-		var id = $(this).attr('bookmark'); 
+		e.preventDefault(); 
 		
-		jQuery.ajax({
+		var id = $(this).data('bookmark'); 
+		var row = $(this).parents('tr')[0];
+		
+		$.ajax({
 		  type: 'DELETE',
-		  url: 'http://localhost:3000/bookmark/delete',
+		  url: '/bookmark/delete',
+		  dataType: 'json',
 		  data: { id: id }, 
-		  dataType: "jsonp",
+		  success: function(data) {
+			$(row).hide();
+			$(row).remove(); 
+		},
+		  error: function(data) {
+			console.log("Error:");
+			console.log(data);
+		}
 		});
-	}); 
+	});
+}
+
+jQuery(function() {
+
+	//provides the functionality for the edit & delete buttons on each bookmark row. 
+	initBookmarkActionButtons(); 
 	
-	// $(".icon-pencil").bind('click', function() {
-	// 	var id = $(this).attr('bookmark');
-	// 	window.location.replace('http://localhost:3000/bookmark/update');
-	// });
-	
-}); 
+	//provides functionality to the subscribe & unsubscribe buttons in each category
+	initSubscribeActionButton(); 
+	initUnsubscribeActionButton(); 
+});

@@ -25,3 +25,10 @@ Category selection on bookmarklet submission form
 Voting mechanism
 
 Comments 
+
+
+************************************************
+
+NOTE: You must change the urls in public/marklet.js and user#bookmarklet to reflect you host. 
+
+************************************************

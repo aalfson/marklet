@@ -1,2 +1,12 @@
-<h2><%= @name %></h2>
+<div>
+	<h2 style='float: left'><%= @name %></h2>
+	<% if @is_moderator != nil %>
+		<a href="/c/edit/<%= @name %>", class="btn btn-primary" id="edit_category_button"><i class='icon-edit icon-white'></i>&nbsp;Edit</a>
+	<% end %>
+	<% if @is_subscriber %>
+		<a href="/c/unsubscribe", class="btn subscribe_button", id="unsubscribe_button" data-category="<%= @name %>"><i class='icon-minus'></i>&nsbsp;Unsubscribe</a>
+	<% else %>
+		<a href="/c/subscribe", class="btn btn-success subscribe_button", id="subscribe_button" data-category="<%= @name %>"><i class="icon-plus icon-white"></i>&nbsp;Subscribe</a>
+	<% end %>
+</div>
 <%= render "links" %>

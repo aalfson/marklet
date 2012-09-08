@@ -65,10 +65,6 @@
 	width: 50px;
 }
 
-.action_cell a {
-	
-}
-
 #category_list {
 	position: relative;
 	display: block;
@@ -77,4 +73,13 @@
 
 #new_category_button {
 	margin-top: 10px;
+}
+
+#edit_category_button {
+	float: right;
+}
+
+.subscribe_button {
+	float: right;
+	margin: 0 5px 0 5px;
 }
