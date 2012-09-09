@@ -9,5 +9,8 @@
   	<%= label_tag(:description, "Description:") %>
 	<%= text_area_tag(:description, @category.description , {rows: 3, :class => "input-xxlarge", placeholder: "Category description..."}) %><br/>
 
+	<%= label_tag(:moderator, "Moderator:") %>
+	<%= select_tag(:moderator, options_from_collection_for_select(@users, "id", "name", @moderator.id)) %>
+	<br/>
 	<%= submit_tag("Submit") %>
 <% end %>

@@ -38,6 +38,8 @@ class CategoryController < ApplicationController
     #check that the current user is a moderator for the page and set @category
     if category.moderator?(current_user)
       @category = category
+      @users = User.all
+      @moderator = current_user
     else
       redirect_to :root, :flash => {error: "You must be a moderator to edit this category!"}
     end
@@ -51,6 +53,11 @@ class CategoryController < ApplicationController
     #check that the current user is a moderator for the page
     if category.moderator?(current_user)
       category.update_attributes(name: params[:name], description: params[:description])
+      
+      u = User.find(params[:moderator])
+      category.add_moderator(u)
+      category.remove_moderator(current_user)
+      
       redirect_to '/c/' + category.name, :flash => {success: "You successfully updated " + category.name}
     else
       redirect_to :root, :flash => {error: "You must be a moderator to edit this category!"}
@@ -96,11 +103,14 @@ class CategoryController < ApplicationController
       
       debug(category.subscriber?(current_user))
       
-      if(category.subscriber?(current_user))
+      if(category.subscriber?(current_user) && category.moderator?(current_user) == false)
         s = Subscriber.where(category_id: category.id, user_id: current_user.id)
         Subscriber.delete(s)
         status = 304
         message = "You have sucessfully unsubscribed from this category."
+      else
+        status = 500
+        message = "Could not process your request."  
       end
       
     rescue
