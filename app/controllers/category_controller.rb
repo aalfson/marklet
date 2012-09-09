@@ -62,22 +62,56 @@ class CategoryController < ApplicationController
   end
   
   def subscribe
-    category = get_category(params[:category])
-    Subscriber.create(category: category, user: current_user, moderator: false)
-    redirect_to "/c/" + category.name, :flash => {success: "You successfully subscribed to this category."}    
+    
+    status = nil
+    message = nil
+    
+    begin
+      category = Category.where(name: params[:category]).limit(1)[0]
+      
+      if (category.subscriber?(current_user) == false)
+        s = Subscriber.create(category: category, user: current_user, moderator: false)
+        status = 304
+        message = "You successfully subscribed to this category"
+      end
+      
+    rescue
+      status = 500
+      message = "Could not process your request."
+    end
+    
+    respond_to do |format|
+      response.status = status
+      format.json {render :json => message }
+    end
   end
   
   def unsubscribe
-    category = get_category(params[:category])
+    
+    status = nil
+    message = nil
     
     begin
-      s = Subscriber.where(category_id: category.id, user_id: current_user.id)
-      s.destroy!
-      redirect_to :root, :flash => {success: "You have unsubscribed from " + category.name}
-      # render :nothing => true
+      category = Category.where(name: params[:category]).limit(1)[0]
+      
+      debug(category.subscriber?(current_user))
+      
+      if(category.subscriber?(current_user))
+        s = Subscriber.where(category_id: category.id, user_id: current_user.id)
+        Subscriber.delete(s)
+        status = 304
+        message = "You have sucessfully unsubscribed from this category."
+      end
+      
     rescue
-      redirect_to :root, :flash => {error: "Could not unsubscribe user from " + category.name}
+      status = 500
+      message = "Could not process your request."
     end
+    
+    respond_to do |format|
+      response.status = status
+      format.json {render :json => message }
+    end      
   end
   
   private 
@@ -89,11 +123,16 @@ class CategoryController < ApplicationController
     
     #check that category exists
     if category == nil || category.empty?
-      redirect_to :root, :flash => {error: "That category does not exist."}
+      nil
     else
-      category = category[0]
-      return category
+      return category[0]
     end
+  end
+
+  def debug(message)
+    puts "**************************************"
+    puts message
+    puts "**************************************"
   end
   
 end

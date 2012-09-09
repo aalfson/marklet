@@ -4,9 +4,9 @@
 		<a href="/c/edit/<%= @name %>", class="btn btn-primary" id="edit_category_button"><i class='icon-edit icon-white'></i>&nbsp;Edit</a>
 	<% end %>
 	<% if @is_subscriber %>
-		<a href="/c/unsubscribe", class="btn subscribe_button", id="unsubscribe_button" data-category="<%= @name %>"><i class='icon-minus'></i>&nsbsp;Unsubscribe</a>
-	<% else %>
-		<a href="/c/subscribe", class="btn btn-success subscribe_button", id="subscribe_button" data-category="<%= @name %>"><i class="icon-plus icon-white"></i>&nbsp;Subscribe</a>
+		<div id="subscribe_button" class="subscribe_button" data-category="<%= @name %>" data-action="unsubscribe"><a href="", class="btn btn-danger"><i class='icon-minus icon-white'></i>&nbsp;Unsubscribe</a></div>
+	<% elsif current_user %>
+		<div id="subscribe_button" class="subscribe_button" data-category="<%= @name %>" data-action="subscribe"><a href="", class="btn btn-success"><i class='icon-plus icon-white'></i>&nbsp;Subscribe</a></div>
 	<% end %>
 </div>
 <%= render "links" %>

@@ -3,5 +3,7 @@
 	<% @categories.each do |c| %>
 		<a href="/c/<%= c.name %>"><%= c.name %></a><br/>
 	<% end %>
-	<%= link_to "New Category", :new_category, {:class => "btn", :id => "new_category_button"} %>
+	<% if current_user %>
+		<%= link_to "New Category", :new_category, {:class => "btn", :id => "new_category_button"} %>
+	<% end %>
 </div>

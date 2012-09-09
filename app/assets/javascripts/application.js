@@ -15,52 +15,57 @@
 //= require twitter/bootstrap
 //= require_tree .
 
-function initUnsubscribeActionButton() {
+function subscribe() {
 	
-	$("#unsubscribe_button").bind('click', function(e) {
-		
-		e.preventDefault(); 
-		
-		var category = $(this).data('category'); 
-
-		$.ajax({
-			type: 'POST', 
-			url: '/c/unsubscribe',
-			data: { category: category },
-			success: function() {
-				$(this).unbind();
-				$(this).attr('id', "#subscribe_button"); 
-				$("#subscribe_button > i").attr('class', 'icon-minus icon-white'); 
-				initSubscribeButton();
-			}
-		}); 		
+	var category = $("#subscribe_button").data('category'); 
+	
+	$.ajax({
+		type: 'POST', 
+		url: '/c/subscribe',
+		data: { category: category },
+		dataType: 'json',
+		success: function(data) {
+			$('#subscribe_button').html("<a href='' class='btn btn-danger'><i class='icon-minus icon-white'></i>&nbsp;Unsubscribe</a>"); 
+			$('#subscribe_button').data('action', 'unsubscribe');
+		},
+		error: function(data) {
+			console.log(data);
+		}
 	});
 }
 
+function unsubscribe() {
 
-function initSubscribeActionButton() {
+	var category = $("#subscribe_button").data('category'); 
 	
-	$("#subscribe_button").bind('click', function(e) {
-		
-		e.preventDefault(); 
-						
-		var category = $(this).data('category'); 
-
-		$.ajax({
-			type: 'POST', 
-			url: '/c/subscribe',
-			data: { category: category },
-			dataType: "jsonp",
-			success: function() {
-				$(this).unbind();
-				$(this).attr('id', "#unsubscribe_button"); 
-				$("#unsubscribe_button > i").attr('class', 'icon-plus icon-white'); 
-				initUnsubscribeButton();
-			}
-		}); 
-	}); 
+	$.ajax({
+		type: 'POST', 
+		url: '/c/unsubscribe',
+		data: { category: category },
+		dataType: 'json',
+		success: function(data) {
+			$('#subscribe_button').html("<a href='' class='btn btn-success'><i class='icon-plus icon-white'></i>&nbsp;Subscribe</a>"); 
+			$('#subscribe_button').data('action', 'subscribe');
+		},
+		error: function(data) {
+			console.log(data);
+		}
+	});
+	
 }
 
+function initSubscribeButton() {
+	
+	$("#subscribe_button").bind('click', function(e) {
+		e.preventDefault(); 
+		if ($(this).data('action') == 'subscribe') {
+			subscribe(); 
+		}
+		else if ($(this).data('action') == 'unsubscribe') {
+			unsubscribe(); 		
+		}
+	});
+}		
 
 function initBookmarkActionButtons() {
 	
@@ -89,7 +94,6 @@ function initBookmarkActionButtons() {
 			$(row).remove(); 
 		},
 		  error: function(data) {
-			console.log("Error:");
 			console.log(data);
 		}
 		});
@@ -102,6 +106,5 @@ jQuery(function() {
 	initBookmarkActionButtons(); 
 	
 	//provides functionality to the subscribe & unsubscribe buttons in each category
-	initSubscribeActionButton(); 
-	initUnsubscribeActionButton(); 
+	initSubscribeButton(); 
 });

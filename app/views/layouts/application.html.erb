@@ -65,16 +65,18 @@
 				<%= render "/category/category_list" %>
 			</div>
            	<div class="span9">
-			<p class="notice"><%= notice %></p>
-			<% if alert != nil %>
-		    	<p class="alert"><%= alert %></p>
-			<% end %>
-			<% if flash[:error] != nil %>
-		    	<p class="alert alert-error"><%= flash[:error] %></p>
-			<% end %>
-			<% if flash[:success] != nil %>
-		    	<p class="alert alert-success"><%= flash[:success] %></p>
-			<% end %>
+			<div id="notifications">
+				<p class="notice"><%= notice %></p>
+				<% if alert != nil %>
+			    	<p class="alert"><%= alert %></p>
+				<% end %>
+				<% if flash[:error] != nil %>
+			    	<p class="alert alert-error"><%= flash[:error] %></p>
+				<% end %>
+				<% if flash[:success] != nil %>
+			    	<p class="alert alert-success"><%= flash[:success] %></p>
+				<% end %>		
+			</div>
               <%= yield %>
             </div>
         </div><!--/row-->

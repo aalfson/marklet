@@ -45,11 +45,10 @@ class Category < ActiveRecord::Base
   end
 
    def moderator?(user)
-     if self.users.moderators.include?(user)
-       return true
-     else
-       return false
-     end
+     return self.users.moderators.include?(user)
    end
   
+   def subscriber?(user)
+     return self.users.include?(user)
+   end
 end

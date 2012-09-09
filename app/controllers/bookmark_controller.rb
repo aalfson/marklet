@@ -50,6 +50,13 @@ class BookmarkController < ApplicationController
        end
     end
     
+    #check to see if user is a subscriber
+    if user_signed_in? && category.subscriber?(current_user)
+      @is_subscriber = true
+    else
+      @is_subscriber = false
+    end
+
     #check to see if user is moderator
     if user_signed_in? && category.moderator?(current_user)
       @is_moderator = true
@@ -109,7 +116,7 @@ class BookmarkController < ApplicationController
       begin
         bookmark = Bookmark.find(id)
       rescue
-       respond_to do |format|
+        respond_to do |format|
           response.status = 500
           format.json { render :json => "Could not process request." }
         end
@@ -117,9 +124,7 @@ class BookmarkController < ApplicationController
       
       #delete bookmark if it belongs to the current user
       if bookmark
-        user = bookmark.user
-    
-        if user == current_user
+        if bookmark.user == current_user
            bookmark.destroy
         end
         
