@@ -8,6 +8,9 @@
 
   	<%= label_tag(:url, "URL:") %>
 	<%= text_field_tag(:url, @bookmark.url) %><br/>
+	
+	<%= label_tag(:category, "Category:") %>
+	<%= select_tag(:category, options_from_collection_for_select(@categories, "id", "name", @selected.id)) %><br/>
 
 	<%= submit_tag("Update") %>
 <% end %>

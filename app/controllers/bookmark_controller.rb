@@ -31,6 +31,7 @@ class BookmarkController < ApplicationController
     end
   end
   
+  #shows all bookmarks for a given category
   def category_index
     @name = params[:category]
     
@@ -85,6 +86,15 @@ class BookmarkController < ApplicationController
   def update_bookmark_form
     begin
       @bookmark = Bookmark.find(params[:id])
+      @categories = Category.all
+      @selected = nil
+      
+      if @bookmark.category
+        @selected = @bookmark.category
+      else
+        @selected = @categories[0]
+      end
+        
     rescue
       redirect_to :root, :flash => {error: "There was a problem with the page you requested."}
     end
@@ -95,11 +105,12 @@ class BookmarkController < ApplicationController
     
     begin
       bookmark = Bookmark.find(params[:id])
+      category = Category.find(params[:category])
       
       #Only the title and url attributes are updateable. 
       if bookmark.user == current_user
-        bookmark.update_attributes(url: params[:url], title: params[:title])
-        redirect_to '/' + current_user.name
+        bookmark.update_attributes(url: params[:url], title: params[:title], category: category)
+        redirect_to '/' + current_user.name, :flash => {success: "Successfully updated the bookmark."}
       end
     rescue
       redirect_to :root, :flash => {error: "Could not update the bookmark."}
