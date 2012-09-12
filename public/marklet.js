@@ -1,3 +1,16 @@
+function getMarkletForm() {
+	$(document).ready(function() {
+		
+		var form = document.createElement("div"); 
+		$(form).attr('id', 'markletOverlay'); 
+		$(form).attr('style', 'width: 50%; height: 50%; position: absolute; z-index: 1000; background-color: #000; margin: 0 auto 0 auto;');
+
+		//var form = "<div id='markletOverlay' style='width: 100%; height: 100%; position: absolute; z-index: 1000; background-color: #000; ><h1>THIS IS ONE HELL OF AN OVERLAY!</h1></div>";
+		$('body').prepend(form);
+	});
+}
+
+
 function postBookmark() {
 
 	$(document).ready(function() {
@@ -9,7 +22,7 @@ function postBookmark() {
 		  url: 'http://localhost:3000/bookmark/create',
 		  data: { url: loc, title: titleVal, id: markletid }, 
 		  dataType: "jsonp",
-		  complete: alert("Saved to marklet!"),
+		  //success: alert("Saved to marklet!"),
 		});		
 	});
 }
@@ -46,7 +59,8 @@ function init() {
 
 	try {
 		if (jQuery) {
-			postBookmark();
+			//postBookmark();
+			getMarkletForm(); 
 		}
 	}
 	catch(err) {
