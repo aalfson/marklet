@@ -14,26 +14,23 @@ function getMarkletForm() {
 		$(pageTitleFieldLabel).text("Page Title:"); 
 
 		var pageTitleField = document.createElement("input"); 
-		$(pageTitleField).attr("id", "markletPageTitle"); 
-		$(pageTitleField).attr("type", "text");
+		$(pageTitleField).attr({"id": "markletPageTitle", "type": "text", "value": document.title}); 
 		
 		var pageCategoryLabel = document.createElement("label"); 
 		$(pageCategoryLabel).attr("for", "markletCategory");
 		$(pageCategoryLabel).text("Category:"); 
 
-		var pageCategoryField = document.createElement("input"); 
+		var pageCategoryField = document.createElement("select"); 
 		$(pageCategoryField).attr("id", "markletCategory"); 
-		$(pageCategoryField).attr("type", "select");
+		// $(pageCategoryField).attr("multiple", "multiple");
 
 		var cancel = document.createElement("input"); 
 		$(cancel).attr("id", "markletCancel"); 
 		$(cancel).attr("type", "button");
-		$(cancel).attr("value", "cancel");
+		$(cancel).attr("value", "Cancel");
 		
 		var submit = document.createElement("input"); 
-		$(submit).attr("name", "commit"); 
-		$(submit).attr("type", "submit");
-		$(submit).attr("value", "Submit"); 
+		$(submit).attr({"name": "commit", "type": "submit", "value": "Submit"}); 
 		
 		$(form).append(pageTitleFieldLabel); 
 		$(form).append(pageTitleField);
