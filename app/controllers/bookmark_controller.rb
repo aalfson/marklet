@@ -4,6 +4,11 @@ class BookmarkController < ApplicationController
 
   #used to construct the bookmark submit form
   def form
+    
+    #cross-site scripting fix
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-Prototype-Version'
+    
     begin
       @Categories = User.find(params[:user]).categories
       render :partial => 'form'
