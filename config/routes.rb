@@ -7,6 +7,7 @@ Marklet::Application.routes.draw do
   match '/bookmark/delete' => 'bookmark#delete'
   match '/bookmark/update/:id' => 'bookmark#update_bookmark_form', :as => :bookmarklet_update_form
   match '/bookmark/update' => 'bookmark#update'
+  match '/bookmark/form' => 'bookmark#form'
   
   match '/:user/bookmarklet' => 'user#bookmarklet', :as => :bookmarklet
   match '/:user' => 'bookmark#user_index', :as => :user

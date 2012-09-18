@@ -1,6 +1,19 @@
 class BookmarkController < ApplicationController
   
   before_filter :authenticate_user!, :only => [:update, :delete]
+
+  #used to construct the bookmark submit form
+  def form
+    begin
+      @Categories = User.find(params[:user]).categories
+      render :partial => 'form'
+    rescue
+      respond_to do |format|
+        response.status = 500
+      end
+    end
+  end
+
   
   #handles bookmarklet post request
   def create

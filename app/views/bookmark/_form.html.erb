@@ -1,0 +1,12 @@
+<form id='markletSubmitForm'>
+    <h3>Marklet</h3>
+    <label for='markletPageTitle'>Title:</label>
+    <input id='markletPageTitle' type='text'/>
+    <label for='markletCategory'>Category:</label>
+    <select id='markletCategory'>
+		<% @categories.each do |c|%>
+			<option value='<%= c.name %>'><%= c.name %></option>
+		<% end %>
+	</select><br/>
+	<input type='button' value='Cancel'/><input type='submit' value='Submit'/>
+</form>
