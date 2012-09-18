@@ -5,12 +5,9 @@ function getMarkletForm() {
 		data: {user: markletid},
 		success: function(data){
 			
-			// var css = $("link"); 
-			// 			css.attr({rel: "stylesheet", type: "text/css", href: "http://localhost:3000/form.css" }); 
-			// $("head:last").append(css).ready(function() {
-			// 
-			// }); 
-			
+			var form = document.createElement("div"); 
+			$(form).attr("id", "markletFormContainer"); 
+			$(form).html(data); 
 			$('body').prepend(data);		
 		}
 	}); 
