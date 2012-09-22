@@ -3,12 +3,13 @@ function getMarkletForm() {
 		type: 'POST', 
 		url: 'http://localhost:3000/bookmark/form',
 		data: {user: markletid},
-		success: function(data){
+		success: function(data){	
+			$('body').prepend(data);
 			
-			var form = document.createElement("div"); 
-			$(form).attr("id", "markletFormContainer"); 
-			$(form).html(data); 
-			$('body').prepend(data);		
+			$("#markletCancel").bind('click', function() {
+				$("#markletFormContainer").hide(); 
+				$("#markletFormContainer").remove(); 
+			}); 		
 		}
 	}); 
 }
