@@ -27,10 +27,13 @@ In the future, users will be able to vote on the relevance of each bookmark such
 
 ## Road Map: 
 
-* Category selection on bookmarklet submission form
+* Testing for Bookmarklet
 * Voting mechanism
 * Comments 
 
+## Known issues: 
+* Bookmarklet has issues saving HTTPS pages
+* Native page css can cause minor inconsistencies in the way the submit form is rendered. 
 
 ************************************************
 
