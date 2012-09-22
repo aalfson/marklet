@@ -31,11 +31,12 @@ function postBookmark() {
 	$(document).ready(function() {
 		var loc = window.location.protocol + "//" + window.location.host + window.location.pathname;
 		var titleVal = document.title;
+		var category = $("#markletCategory").val(); 
 
 		jQuery.ajax({
 		  type: 'POST',
 		  url: 'http://localhost:3000/bookmark/create',
-		  data: { url: loc, title: titleVal, id: markletid }, 
+		  data: { url: loc, title: titleVal, id: markletid, category: category }, 
 		  success: function() {
 			closeOverlay(); 
 		}

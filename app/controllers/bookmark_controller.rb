@@ -10,7 +10,15 @@ class BookmarkController < ApplicationController
     headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-Prototype-Version'
     
     begin
-      @Categories = User.find(params[:user]).categories
+    
+      @categories = nil
+      
+      if User.find(params[:user]).categories.empty?
+        @categories = Category.all
+      else
+        @categories = User.find(params[:user]).categories
+      end
+      
       @title = params[:title]
       render :partial => 'form'
     rescue
@@ -30,10 +38,11 @@ class BookmarkController < ApplicationController
     
     u = User.find(params[:id])
     b = Bookmark.where(url: params[:url], user_id: u).first
+    c = Category.find(params[:category])
     
     #ensure user does not submit a link more than once
     if b == nil
-     Bookmark.create(url: params[:url], title: params[:title], user: u);  
+     Bookmark.create(url: params[:url], title: params[:title], user: u, category: c);  
     end
 
     render :nothing => true
