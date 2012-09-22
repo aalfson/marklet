@@ -11,6 +11,7 @@ class BookmarkController < ApplicationController
     
     begin
       @Categories = User.find(params[:user]).categories
+      @title = params[:title]
       render :partial => 'form'
     rescue
       respond_to do |format|

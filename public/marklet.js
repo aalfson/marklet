@@ -2,18 +2,17 @@ function getMarkletForm() {
 	jQuery.ajax({
 		type: 'POST', 
 		url: 'http://localhost:3000/bookmark/form',
-		data: {user: markletid},
+		data: {user: markletid, title: document.title},
 		success: function(data){	
 			$('body').prepend(data);
 			
-			$("#markletCancel").bind('click', function() {
-				$("#markletFormContainer").hide(); 
-				$("#markletFormContainer").remove(); 
+			$("#markletFormCancel").bind('click', function() {
+				$("#markletSubmitFormOverlay").hide(); 
+				$("#markletSubmitFormOverlay").remove(); 
 			}); 		
 		}
 	}); 
 }
-
 
 function postBookmark() {
 
