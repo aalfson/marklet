@@ -1,17 +1,29 @@
+function closeOverlay() {
+	$("#markletSubmitFormOverlay").hide(); 
+	$("#markletSubmitFormOverlay").remove(); 
+}
+
 function getMarkletForm() {
-	jQuery.ajax({
-		type: 'POST', 
-		url: 'http://localhost:3000/bookmark/form',
-		data: {user: markletid, title: document.title},
-		success: function(data){	
-			$('body').prepend(data);
-			
-			$("#markletFormCancel").bind('click', function() {
-				$("#markletSubmitFormOverlay").hide(); 
-				$("#markletSubmitFormOverlay").remove(); 
-			}); 		
-		}
-	}); 
+	
+	if ($("#markletSubmitFormOverlay").size() > 0 == false) {
+		jQuery.ajax({
+			type: 'POST', 
+			url: 'http://localhost:3000/bookmark/form',
+			data: {user: markletid, title: document.title},
+			success: function(data){
+ 				$("body").data("marklet", "true"); 	
+				$('body').prepend(data);
+				
+				$("#markletFormCancel").bind('click', function() {
+					closeOverlay();
+				}); 
+				
+				$("#markletFormSubmit").bind('click', function() {
+					postBookmark(); 
+				}); 
+			}
+		}); 		
+	}
 }
 
 function postBookmark() {
@@ -23,7 +35,10 @@ function postBookmark() {
 		jQuery.ajax({
 		  type: 'POST',
 		  url: 'http://localhost:3000/bookmark/create',
-		  data: { url: loc, title: titleVal, id: markletid }
+		  data: { url: loc, title: titleVal, id: markletid }, 
+		  success: function() {
+			closeOverlay(); 
+		}
 		});		
 	});
 }
@@ -63,14 +78,12 @@ function init() {
 
 	try {
 		if (jQuery) {
-			//postBookmark();
 			getMarkletForm(); 
 		}
 	}
 	catch(err) {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
 			loadScript("http://localhost:3000/jquery-1.7.2.min.js", function() {
-				// postBookmark();
 				getMarkletForm();
 			});	
 		}
@@ -79,5 +92,4 @@ function init() {
 		}	
 	}
 }
-
 init();
