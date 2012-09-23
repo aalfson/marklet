@@ -8,7 +8,7 @@ function getMarkletForm() {
 	if ($("#markletSubmitFormOverlay").size() > 0 == false) {
 		jQuery.ajax({
 			type: 'POST', 
-			url: 'http://localhost:3000/bookmark/form',
+			url: 'http://marklet.herokuapp.com/bookmark/form',
 			data: {user: markletid, title: document.title},
 			success: function(data){
  				$("body").data("marklet", "true"); 	
@@ -35,7 +35,7 @@ function postBookmark() {
 
 		jQuery.ajax({
 		  type: 'POST',
-		  url: 'http://localhost:3000/bookmark/create',
+		  url: 'http://marklet.herokuapp.com/bookmark/create',
 		  data: { url: loc, title: titleVal, id: markletid, category: category }, 
 		  success: function() {
 			closeOverlay(); 
@@ -84,7 +84,7 @@ function init() {
 	}
 	catch(err) {
 		if (typeof jQuery != 'function' || typeof $ != 'function') {
-			loadScript("http://localhost:3000/jquery-1.7.2.min.js", function() {
+			loadScript("http://marklet.herokuapp.com/jquery-1.7.2.min.js", function() {
 				getMarkletForm();
 			});	
 		}
