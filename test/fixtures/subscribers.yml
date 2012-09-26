@@ -1,11 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  category_id: 
-  user_id: 
-  moderator: false
-
-two:
-  category_id: 
-  user_id: 
-  moderator: false
+joe_subscriber: 
+    category: "tech"
+    user: "joe"
+    moderator: "true"
