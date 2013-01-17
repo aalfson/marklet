@@ -4,7 +4,7 @@ Marklet is a Hacker News / Reddit / Digg style bookmark sharing application buil
 
 ## Demo
 
-For the moment, you can find a demo of the application here: [marklet](http://marklet.herokuapp.com/)
+For the moment, you can find a demo of the application here: [marklet](http://marklet.herokuapp.com/). You'll need to create an account and put your unique marklet bookmarklet in your tool bar to send links to the app.
 
 ## Description & Feature List:  
 
@@ -16,6 +16,13 @@ In the future, users will be able to vote on the relevance of each bookmark such
 
 * [Devise](https://github.com/plataformatec/devise)
 * [Bootstrap](https://github.com/twitter/bootstrap)
+
+************************************************
+
+### NOTE: You must change the urls in public/marklet.js and user#bookmarklet to reflect you host. 
+
+************************************************
+
 
 ## Completed Features: 
 
@@ -34,9 +41,3 @@ In the future, users will be able to vote on the relevance of each bookmark such
 ## Known issues: 
 * Bookmarklet has issues saving HTTPS pages
 * Native page css can cause minor inconsistencies in the way the submit form is rendered. 
-
-************************************************
-
-### NOTE: You must change the urls in public/marklet.js and user#bookmarklet to reflect you host. 
-
-************************************************
